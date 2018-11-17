@@ -1,5 +1,5 @@
 .DS_Store
 favorable-valor-220612-806105232d76.json
 .env
-./vendor
-./profile_photo
+/vendor
+/profile_photo
