@@ -634,7 +634,7 @@ function validation($data) {
 <body id="top">
         <div id="content" class="container">
         <header id="topheader">
-        <p id="logo"><a href="index.html#"><img src="./images/logos/nox_logo_touka.png" class="headerimg"></a></p>
+        <p id="logo"><a href="index.php#"><img src="./images/logos/nox_logo_touka.png" class="headerimg"></a></p>
         </header>
         <h1>応募フォーム</h1>
         <?php if( $page_flag === 1 ): ?>
@@ -772,7 +772,7 @@ function validation($data) {
         <?php elseif( $page_flag === 2 ): ?>
 
         <p>送信が完了しました。</p>
-        <p><a href="index.html">トップに戻る</a></p>
+        <p><a href="index.php">トップに戻る</a></p>
 
         <?php else: ?>
         <div id="privacy">
@@ -831,6 +831,7 @@ function validation($data) {
             <div class="element_wrap">
                 <label>連絡先電話番号（ハイフンなし）</label>
                 <input type="tel" name="phone_number" value="<?php if( !empty($clean['phone_number']) ){ echo $clean['phone_number']; } ?>">
+                
             </div>
             <div class="element_wrap">
                 <label>*メールアドレス</label>
@@ -888,7 +889,7 @@ function validation($data) {
                 <label for="agreement"><input id="agreement" type="checkbox" name="agreement" value="1" <?php if( !empty($clean['agreement']) && $clean['agreement']==="1" ){ echo 'checked' ; } ?>><a href="#privacy">プライバシーポリシー</a>に同意する</label>
             </div>
             <input type="submit" name="btn_confirm" value="入力内容を確認する">
-            <button type="button" name="btn_back" onclick="history.back()">戻る</button>
+            <button type="button" name="btn_back" onclick="location.href='index.php#'">戻る</button>
         </form>
 
 

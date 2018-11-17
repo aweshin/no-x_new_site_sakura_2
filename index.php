@@ -155,13 +155,13 @@ if( !empty($clean['btn_confirm']) ) {
 		// 本文を設定
 		$admin_reply_text = "下記の内容でお問い合わせがありました。\n\n";
 		$admin_reply_text .= "お問い合わせ日時：" . $date . "\n\n";
-        $auto_reply_text .= "御社名：" . $clean['your_company'] . "\n\n";
-		$auto_reply_text .= "氏名：" . $clean['your_name'] . "\n\n";
-		$auto_reply_text .= "メールアドレス：" . $clean['email'] . "\n\n";
-		$auto_reply_text .= "電話番号：" . $clean['tel'] . "\n\n";
+        $admin_reply_text .= "御社名：" . $clean['your_company'] . "\n\n";
+		$admin_reply_text .= "氏名：" . $clean['your_name'] . "\n\n";
+		$admin_reply_text .= "メールアドレス：" . $clean['email'] . "\n\n";
+		$admin_reply_text .= "電話番号：" . $clean['tel'] . "\n\n";
 	
 
-		$auto_reply_text .= "お問い合わせ内容：" . $clean['message'] . "\n\n";
+		$admin_reply_text .= "お問い合わせ内容：" . $clean['message'] . "\n\n";
 		
 		// テキストメッセージをセット
 //		$body = "--__BOUNDARY__\n";
@@ -417,14 +417,15 @@ function validation($data) {
 					<div class="row gtr-50">
 						<div class="col-6 col-12-mobile"><input type="text" class="text" name="your_name" placeholder="*Name" value="<?php if( !empty($clean['your_name']) ){ echo $clean['your_name']; } ?>"/></div>
                         
-						<div class="col-6 col-12-mobile"><input type="text" class="text" name="company" placeholder="Company" value="<?php if( !empty($clean['your_company']) ){ echo $clean['your_company']; } ?>"/></div>
+						<div class="col-6 col-12-mobile"><input type="text" class="text" name="your_company" placeholder="Company" value="<?php if( !empty($clean['your_company']) ){ echo $clean['your_company']; } ?>"/></div>
                         
                         <div class="col-6 col-12-mobile"><input type="text" class="text" name="email" placeholder="*Email" value="<?php if( !empty($clean['email']) ){ echo $clean['email']; } ?>"/></div>
                         
-                        <div class="col-6 col-12-mobile"><input type="tel" class="text" name="tel" placeholder="Tel" value="<?php if( !empty($clean['tel']) ){ echo $clean['tel']; } ?>"/></div>
+                        <div class="col-6 col-12-mobile"><input type="tel" class="text" name="tel" placeholder="Tel(ハイフンなし)" value="<?php if( !empty($clean['tel']) ){ echo $clean['tel']; } ?>"/></div>
+                        
                         
 						<div class="col-12">
-							<textarea name="message" placeholder="*Message" value="<?php if( !empty($clean['message']) ){ echo $clean['message']; } ?>"></textarea>
+							<textarea name="message" placeholder="*Message"><?php if( !empty($clean['message']) ){ echo $clean['message']; } ?></textarea>
 						</div>
                         <div id="privacy">
                         <h3>プライバシーポリシー</h3>
