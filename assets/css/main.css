@@ -1630,7 +1630,7 @@ input, select, textarea {
 	form input[type="text"],
 	form input[type="email"],
 	form input[type="password"],
-	form input[type="tel"],
+	form input[type="number"],
 	form select,
 	form textarea {
 		-moz-transition: background-color 0.35s ease-in-out;
@@ -1648,7 +1648,7 @@ input, select, textarea {
 		form input[type="text"]:focus,
 		form input[type="email"]:focus,
 		form input[type="password"]:focus,
-		form input[type="tel"]:focus,
+		form input[type="number"]:focus,
 		form select:focus,
 		form textarea:focus {
 			background-color: #f8f8f8;
@@ -1657,7 +1657,7 @@ input, select, textarea {
 	form input[type="text"],
 	form input[type="email"],
 	form input[type="password"],
-	form input[type="tel"],
+	form input[type="number"],
 	form select {
 		line-height: 1em;
 	}
@@ -2455,6 +2455,7 @@ input, select, textarea {
 		/* Header */
 
 			#header {
+                
 				padding: 8em 0 10em 0;
 			}
 
@@ -2792,3 +2793,6 @@ input, select, textarea {
          color: white;   
     }
 
+#header {
+    height: 100vh;
+}

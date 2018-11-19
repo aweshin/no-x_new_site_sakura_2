@@ -108,11 +108,27 @@ if( !empty($clean['btn_confirm']) ) {
         $dotenv = new Dotenv(__dir__);
         $dotenv->load();
         $address = getenv('ADMIN_EMAIL');
+        
+        
+        // 送信元
+        $from = mb_encode_mimeheader("株式会社ノックス") . " <${address}>";
+
+        // 送信元メールアドレス
+        $from_mail = "${address}";
+
+        // 送信者名
+        $from_name = mb_encode_mimeheader("株式会社ノックス");
+
 		$header = "MIME-Version: 1.0\n";
-		$header = "Content-Type: multipart/mixed;boundary=\"__BOUNDARY__\"\n";
-		$header .= "From: NO-X <${address}>\n";
-		$header .= "Reply-To: NO-X <${address}>\n";
-	
+		$header .= "Content-Type: multipart/mixed;boundary=\"__BOUNDARY__\"\n";
+        $header .= "Return-Path: " . $from_mail . " \r\n";
+        $header .= "From: " . $from ." \r\n";
+        $header .= "Sender: " . $from ." \r\n";
+        $header .= "Reply-To: " . $from_mail . " \r\n";
+        $header .= "Organization: " . $from_name . " \r\n";
+        $header .= "X-Sender: " . $from_mail . " \r\n";
+        $header .= "X-Priority: 3 \r\n";
+
 		// 件名を設定
 		$auto_reply_subject = 'ご応募ありがとうございます。';
 	    $date = date("Y-m-d H:i");
@@ -772,7 +788,7 @@ function validation($data) {
         <?php elseif( $page_flag === 2 ): ?>
 
         <p>送信が完了しました。</p>
-        <p><a href="index.php">トップに戻る</a></p>
+        <p><a href="index.php#">トップに戻る</a></p>
 
         <?php else: ?>
         <div id="privacy">
@@ -830,7 +846,7 @@ function validation($data) {
             </div>
             <div class="element_wrap">
                 <label>連絡先電話番号（ハイフンなし）</label>
-                <input type="tel" name="phone_number" value="<?php if( !empty($clean['phone_number']) ){ echo $clean['phone_number']; } ?>">
+                <input type="number" pattern="\d*" name="phone_number" value="<?php if( !empty($clean['phone_number']) ){ echo $clean['phone_number']; } ?>">
                 
             </div>
             <div class="element_wrap">

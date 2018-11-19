@@ -97,12 +97,30 @@ if( !empty($clean['btn_confirm']) ) {
         
         $dotenv = new Dotenv(__dir__);
         $dotenv->load();
+        
+
         $address = getenv('ADMIN_EMAIL');
+        
+                
+        // 送信元
+        $from = mb_encode_mimeheader("株式会社ノックス") . " <${address}>";
+
+        // 送信元メールアドレス
+        $from_mail = "${address}";
+
+        // 送信者名
+        $from_name = mb_encode_mimeheader("株式会社ノックス");
+
 		$header = "MIME-Version: 1.0\n";
-//		$header = "Content-Type: multipart/mixed;boundary=\"__BOUNDARY__\"\n";
-		$header .= "From: 株式会社ノックス <${address}>\n";
-		$header .= "Reply-To: 株式会社ノックス <${address}>\n";
-	
+		$header .= "Content-Type: text/plain \r\n";
+        $header .= "Return-Path: " . $from_mail . " \r\n";
+        $header .= "From: " . $from ." \r\n";
+        $header .= "Sender: " . $from ." \r\n";
+        $header .= "Reply-To: " . $from_mail . " \r\n";
+        $header .= "Organization: " . $from_name . " \r\n";
+        $header .= "X-Sender: " . $from_mail . " \r\n";
+        $header .= "X-Priority: 3 \r\n";
+
 		// 件名を設定
 		$auto_reply_subject = 'お問い合わせありがとうございます。';
 	    $date = date("Y-m-d H:i");
@@ -265,7 +283,7 @@ function validation($data) {
                 border: 1px solid #ff2e5a;
                 border-radius: 5px;
             }
-
+        
         </style>
 
 	</head>
@@ -321,7 +339,7 @@ function validation($data) {
 
 		<!-- Feature 2 -->
 			<article class="container box style1 left">
-				<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+                <a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
 				<div class="inner">
 					<header>
 						<h2>登録をお考えの皆様へーお仕事の流れ<br />
@@ -421,7 +439,7 @@ function validation($data) {
                         
                         <div class="col-6 col-12-mobile"><input type="text" class="text" name="email" placeholder="*Email" value="<?php if( !empty($clean['email']) ){ echo $clean['email']; } ?>"/></div>
                         
-                        <div class="col-6 col-12-mobile"><input type="tel" class="text" name="tel" placeholder="Tel(ハイフンなし)" value="<?php if( !empty($clean['tel']) ){ echo $clean['tel']; } ?>"/></div>
+                        <div class="col-6 col-12-mobile"><input type="number" pattern="\d*" class="text" name="tel" placeholder="Tel(ハイフンなし)" value="<?php if( !empty($clean['tel']) ){ echo $clean['tel']; } ?>"/></div>
                         
                         
 						<div class="col-12">
@@ -485,9 +503,9 @@ function validation($data) {
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
 			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+            <script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>

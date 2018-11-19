@@ -8,6 +8,7 @@
 
 	var	$window = $(window),
 		$body = $('body'),
+        $topheader = $('#topheader'),
 		settings = {
 
 			// Parallax background effect?
@@ -102,4 +103,67 @@
 			usePopupNav: true
 		});
 
+      // スクロール途中から表示したいメニューバーを指定
+        
+      // メニューバーは初期状態では消しておく
+      $topheader.hide();
+
+      // 表示を開始するスクロール量を設定(px)
+      var TargetPos = 350;
+
+      // スクロールされた際に実行
+      $window.scroll( function() {
+         // 現在のスクロール位置を取得
+         var ScrollPos = $(window).scrollTop();
+         // 現在のスクロール位置と、目的のスクロール位置を比較
+         if( ScrollPos > TargetPos ) {
+            // 表示(フェイドイン)
+            $topheader.fadeIn();
+         }
+         else {
+            // 非表示(フェイドアウト)
+            $topheader.fadeOut();
+         }
+      });
+
+    var headerHight = $topheader.outerHeight(); //ヘッダの高さ
+    $('a[href^="#"]').click(function(){
+        var href= $(this).attr("href");
+        var target = $(href == "#" || href == "" ? 'html' : href);
+        var position = target.offset().top-headerHight; //ヘッダの高さ分位置をずらす
+        $("html, body").animate({scrollTop:position}, 1550, "swing");
+        return false;
+    });
+
+    	// Events.
+//		var resizeTimeout, resizeScrollTimeout;
+//
+//		$window
+//			.on('resize', function() {
+//
+//				// Disable animations/transitions.
+//					$body.addClass('is-resizing');
+//
+//				clearTimeout(resizeTimeout);
+//
+//				resizeTimeout = setTimeout(function() {
+//
+//					// Update scrolly links.
+//						$('a[href^="#"]').scrolly({
+//							speed: 1500,
+//							offset: $topheader.outerHeight() - 1
+//						});
+//
+//					// Re-enable animations/transitions.
+//						setTimeout(function() {
+//							$body.removeClass('is-resizing');
+//							$window.trigger('scroll');
+//						}, 0);
+//
+//				}, 100);
+//
+//			})
+//			.on('load', function() {
+//				$window.trigger('resize');
+//			});
 })(jQuery);
